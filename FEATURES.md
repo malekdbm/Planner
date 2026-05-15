@@ -121,6 +121,95 @@ Used by both Wedding (guest hotels, transport) and Honeymoon (trip bookings).
 - Export: PDF summary of guest list, budget, itinerary.
 - Backup / restore: export a single `.json` file to share between devices.
 
+## 18. Countdown Widget & Lock Screen
+- Home-screen widget: days until wedding, days until honeymoon.
+- Lock-screen widget (iOS) / glance (Android) with next event.
+- Tap widget to open the relevant screen.
+
+## 19. Gift Registry & Money Pool
+- Add gift ideas with name, store, price, link, photo.
+- Mark as "claimed by" a guest (private to you).
+- "Cash fund" pool with goal amount and progress (e.g., honeymoon fund).
+- Share a public registry link via native share sheet.
+
+## 20. Music & Playlists 🎵
+- Ceremony, cocktail, dinner, first dance, party playlists.
+- Add songs with title, artist, duration, link (Spotify / Apple Music / YouTube).
+- "Do NOT play" list to send the DJ.
+- Total duration per moment vs. needed time.
+
+## 21. Speeches & Vows
+- Private notepad for vows, speech drafts.
+- Versioning (auto-save history).
+- Practice mode: large-text teleprompter with adjustable scroll speed.
+- Lockable with Face ID / Touch ID (private from partner).
+
+## 22. Photo & Video Plan
+- Shot list for photographer (must-have moments + people groupings).
+- Family combination list (e.g., "bride + both parents").
+- Timeline of photo sessions with duration estimates.
+- Share PDF with photographer.
+
+## 23. Day-Of Timeline
+- Minute-by-minute schedule of the wedding day.
+- Roles: who needs to be where (bridal party, family, vendors).
+- Share read-only link with vendors and party.
+- Live "now" cursor that highlights the current item.
+
+## 24. Vendor Payment Schedule
+- Per vendor: deposit, milestone payments, final balance, due dates.
+- Calendar reminders before each due date.
+- Mark paid, attach receipt.
+- Roll-up: total due this month / next month.
+
+## 25. Travel Companion (Honeymoon)
+- Offline maps for each destination (download before flying).
+- Currency converter with daily rate cache.
+- Local time + home time clock.
+- Tipping guide per country.
+- Emergency numbers per country.
+- Useful phrases (greetings, allergies, taxi) — offline.
+
+## 26. Trip Journal
+- Daily entry while on honeymoon: text, photos, location, mood.
+- Auto-generates a shareable trip recap (PDF/photo book layout).
+- Private by default.
+
+## 27. Weather
+- 10-day forecast for wedding venue (highlights wedding day).
+- Forecast per honeymoon day at the right city.
+- Sunrise / sunset times (useful for photos).
+
+## 28. Guest Communication
+- Bulk message templates: save-the-date, invite, RSVP reminder, week-of info.
+- Send via WhatsApp / SMS / email through the native share sheet.
+- Personalize with `{firstName}` tokens.
+- Track who has been sent what (locally).
+
+## 29. Invite & Website Builder (lite)
+- Pre-styled invitation card; fill in names / date / venue / RSVP link.
+- Export as image to share on WhatsApp / Instagram.
+- Optional: tiny one-page event site (hosted later) for guest info, dress code, map, hotel block.
+
+## 30. Hotel Block for Guests (Wedding)
+- Track room blocks at one or more hotels: hotel name, group code, rate, cutoff date.
+- Track which guests booked.
+
+## 31. Seat-of-the-Pants Notes & To-Do Capture
+- Global "+" button on every screen.
+- Quick capture: voice memo, photo, note → triage later into the right list.
+
+## 32. Settings & Privacy
+- Currency, language (EN / FR), date format.
+- Theme: system / light / dark.
+- App lock with Face ID / Touch ID / PIN.
+- Backup to iCloud (iOS) / Google Drive (Android) — encrypted.
+- Delete all data.
+
+## 33. Localization
+- French and English at launch (couple may travel internationally).
+- All dates, currency, and number formats follow device locale.
+
 ## 16. Mobile-Only UX Principles
 - Bottom tab bar: Home · Calendar · Wedding · Honeymoon · Settings.
 - Large touch targets (44pt+).
