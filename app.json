@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Mariage & Lune de miel",
+    "slug": "planner",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "planner",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.malekdbm.planner"
+    },
+    "android": {
+      "package": "com.malekdbm.planner",
+      "adaptiveIcon": {
+        "backgroundColor": "#F5E6E0"
+      }
+    },
+    "locales": {
+      "fr": "./fr.json"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      [
+        "expo-notifications",
+        {
+          "color": "#C9A27E"
+        }
+      ]
+    ]
+  }
+}
