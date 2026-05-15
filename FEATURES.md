@@ -200,15 +200,17 @@ Used by both Wedding (guest hotels, transport) and Honeymoon (trip bookings).
 - Quick capture: voice memo, photo, note → triage later into the right list.
 
 ## 32. Settings & Privacy
-- Currency, language (EN / FR), date format.
-- Theme: system / light / dark.
-- App lock with Face ID / Touch ID / PIN.
-- Backup to iCloud (iOS) / Google Drive (Android) — encrypted.
-- Delete all data.
+- Devise, format de date.
+- Thème : système / clair / sombre.
+- Verrouillage de l'app avec Face ID / Touch ID / code PIN.
+- Sauvegarde iCloud (iOS) / Google Drive (Android) — chiffrée.
+- Supprimer toutes les données.
 
-## 33. Localization
-- French and English at launch (couple may travel internationally).
-- All dates, currency, and number formats follow device locale.
+## 33. Langue
+- **Application en français uniquement.**
+- Toute l'interface, les notifications, les modèles de messages et les exports PDF sont en français.
+- Formats de date (JJ/MM/AAAA) et heure (24h) à la française par défaut.
+- Devise par défaut : EUR (€), modifiable dans les paramètres.
 
 ## 16. Mobile-Only UX Principles
 - Bottom tab bar: Home · Calendar · Wedding · Honeymoon · Settings.
