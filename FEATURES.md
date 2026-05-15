@@ -18,7 +18,7 @@ L'app est livrée avec **notre** itinéraire déjà saisi.
 
 | # | Date (nuit du) | Lieu | Hébergement | Nuits |
 |---|---|---|---|---|
-| 1 | 16/06 | Gammarth, Tunis | **Novotel Gammarth** 🏨 | 1 |
+| 1 | 16/06 | Gammarth, Tunis | **Mövenpick Gammarth** 🏨 | 1 |
 | 2 | 17–19/06 | Monastir | **Hôtel à Monastir** 🏨 | 3 |
 | 3 | 20–21/06 | Tunis | **Chez mes parents** 🏡 | 2 |
 | 4 | 22/06 | Hammamet | **Hôtel à Hammamet** 🏨 | 1 |
@@ -263,8 +263,9 @@ Used by both Wedding (guest hotels, transport) and Honeymoon (trip bookings).
 
 ---
 
-## Proposed tech (for after feature approval)
-- **React Native + Expo** — single codebase, runs on your phone via Expo Go for testing, easy to ship to App Store / Play Store later.
-- **Local storage**: SQLite (via `expo-sqlite`) for structured data, FileSystem for photos.
-- **Notifications**: `expo-notifications`.
-- **Navigation**: `expo-router` with bottom tabs.
+## Tech retenue
+- **React Native + Expo** — un seul code, testé en parallèle sur **iPhone et Android** via Expo Go.
+- **Stockage local** : SQLite (`expo-sqlite`) pour les données structurées, FileSystem pour les photos.
+- **Notifications** : `expo-notifications`.
+- **Navigation** : `expo-router` avec onglets en bas.
+- **Langue** : française uniquement (cf. §33).
