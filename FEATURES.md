@@ -11,6 +11,24 @@ Two top-level sections: **Wedding** and **Honeymoon**, switchable from a bottom 
 - Honeymoon destination (optional at start), start/end dates.
 - Saves locally on the phone (no account needed for v1).
 
+### 1a. Itinéraire pré-rempli (notre voyage)
+L'app est livrée avec **notre** itinéraire déjà saisi, prêt à compléter :
+
+1. **Mariage 🇹🇳** — Tunisie (ville/lieu à préciser).
+2. **Lune de miel — Étape 1 : Tunisie** — tour de 3 hôtels (noms, villes, dates à préciser).
+3. **Vol Tunisie → Paris 🇫🇷** — séjour à Paris.
+4. **Vol Paris → Grèce 🇬🇷** — tour :
+   - **Crète** (Héraklion ou Chania ?).
+   - **Santorin**.
+   - **Athènes**.
+5. **Vol Grèce → Paris** — retour à Paris pour conclure.
+
+Chaque étape crée automatiquement :
+- une carte de séjour (dates, ville, hôtel) dans la section *Hôtels*,
+- un emplacement réservé dans la section *Vols* pour chaque trajet,
+- des journées vides dans l'*itinéraire jour-par-jour* prêtes à recevoir des activités,
+- des entrées dans le *Calendrier* unifié.
+
 ## 2. Home / Dashboard (per section)
 - Countdown to wedding day and to honeymoon departure.
 - Budget used vs. remaining (progress bar).
