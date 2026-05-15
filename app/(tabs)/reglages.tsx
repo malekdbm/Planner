@@ -1,14 +1,31 @@
-import { Alert, View, Text, StyleSheet, Pressable } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Alert, View, Text, StyleSheet, Pressable, Switch } from 'react-native';
 import { Screen } from '@/components/Screen';
 import { Card } from '@/components/Card';
 import { colors, spacing, fontSize, radius } from '@/theme';
 import { getDb } from '@/db';
+import { getReminderEnabled, setReminderEnabled, rescheduleAllReminders } from '@/notifications';
 
 export default function Reglages() {
+  const [reminders, setReminders] = useState(false);
+
+  useEffect(() => { getReminderEnabled().then(setReminders); }, []);
+
+  const toggleReminders = async (v: boolean) => {
+    setReminders(v);
+    await setReminderEnabled(v);
+    if (v) Alert.alert('Rappels activés', 'Tu seras prévenu·e des tâches, vols et arrivées d\'hôtel.');
+  };
+
+  const reschedule = async () => {
+    await rescheduleAllReminders();
+    Alert.alert('Rappels mis à jour', 'Toutes les notifications ont été reprogrammées.');
+  };
+
   const resetAll = () => {
     Alert.alert(
       'Réinitialiser les données',
-      'Toutes les données locales seront effacées et l\'itinéraire pré-rempli sera rechargé.',
+      "Toutes les données locales seront effacées et l'itinéraire pré-rempli sera rechargé au prochain démarrage.",
       [
         { text: 'Annuler', style: 'cancel' },
         {
@@ -17,14 +34,15 @@ export default function Reglages() {
           onPress: async () => {
             const db = await getDb();
             await db.execAsync(`
-              DELETE FROM hotels;
-              DELETE FROM flights;
-              DELETE FROM reservations;
-              DELETE FROM tasks;
-              DELETE FROM expenses;
-              DELETE FROM meta;
+              DELETE FROM hotels; DELETE FROM flights; DELETE FROM reservations;
+              DELETE FROM tasks; DELETE FROM expenses; DELETE FROM budget_categories;
+              DELETE FROM guests; DELETE FROM activities; DELETE FROM vendors;
+              DELETE FROM packing; DELETE FROM documents; DELETE FROM journal;
+              DELETE FROM shot_list; DELETE FROM playlist; DELETE FROM vows;
+              DELETE FROM day_of; DELETE FROM gifts; DELETE FROM tables_plan;
+              DELETE FROM table_assignments; DELETE FROM meta;
             `);
-            Alert.alert('Effacé', 'Redémarre l\'app pour recharger l\'itinéraire.');
+            Alert.alert('Effacé', "Redémarre l'app pour recharger l'itinéraire.");
           },
         },
       ],
@@ -33,6 +51,21 @@ export default function Reglages() {
 
   return (
     <Screen title="Réglages">
+      <Card title="Notifications">
+        <View style={styles.row}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.rowLabel}>Rappels automatiques</Text>
+            <Text style={styles.help}>Tâches J-1 · vols H-24 et H-3 · hôtels J-1 · réservations H-2</Text>
+          </View>
+          <Switch value={reminders} onValueChange={toggleReminders} />
+        </View>
+        {reminders && (
+          <Pressable onPress={reschedule}>
+            <Text style={styles.linkBtn}>↻ Reprogrammer tous les rappels</Text>
+          </Pressable>
+        )}
+      </Card>
+
       <Card title="Application">
         <Row label="Langue" value="Français 🇫🇷" />
         <Row label="Devise" value="EUR (€)" />
@@ -47,12 +80,12 @@ export default function Reglages() {
       </Card>
 
       <Pressable onPress={resetAll}>
-        <View style={[styles.danger]}>
+        <View style={styles.danger}>
           <Text style={styles.dangerText}>Réinitialiser toutes les données</Text>
         </View>
       </Pressable>
 
-      <Text style={styles.foot}>v0.1 · stockage local uniquement</Text>
+      <Text style={styles.foot}>v0.2 · stockage local uniquement</Text>
     </Screen>
   );
 }
@@ -67,38 +100,12 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: spacing.sm,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  rowLabel: {
-    color: colors.textMuted,
-    fontSize: fontSize.md,
-  },
-  rowValue: {
-    color: colors.text,
-    fontSize: fontSize.md,
-    fontWeight: '500',
-  },
-  danger: {
-    backgroundColor: colors.danger,
-    padding: spacing.lg,
-    borderRadius: radius.md,
-    alignItems: 'center',
-    marginTop: spacing.lg,
-  },
-  dangerText: {
-    color: '#FFF',
-    fontWeight: '700',
-    fontSize: fontSize.md,
-  },
-  foot: {
-    textAlign: 'center',
-    color: colors.textMuted,
-    fontSize: fontSize.xs,
-    marginTop: spacing.xl,
-  },
+  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: spacing.sm, borderBottomWidth: 1, borderBottomColor: colors.border },
+  rowLabel: { color: colors.textMuted, fontSize: fontSize.md },
+  rowValue: { color: colors.text, fontSize: fontSize.md, fontWeight: '500' },
+  help: { color: colors.textMuted, fontSize: fontSize.xs, marginTop: 2 },
+  linkBtn: { color: colors.primaryDark, fontSize: fontSize.md, fontWeight: '600', paddingTop: spacing.sm },
+  danger: { backgroundColor: colors.danger, padding: spacing.lg, borderRadius: radius.md, alignItems: 'center', marginTop: spacing.lg },
+  dangerText: { color: '#FFF', fontWeight: '700', fontSize: fontSize.md },
+  foot: { textAlign: 'center', color: colors.textMuted, fontSize: fontSize.xs, marginTop: spacing.xl },
 });
