@@ -12,21 +12,37 @@ Two top-level sections: **Wedding** and **Honeymoon**, switchable from a bottom 
 - Saves locally on the phone (no account needed for v1).
 
 ### 1a. Itinéraire pré-rempli (notre voyage)
-L'app est livrée avec **notre** itinéraire déjà saisi, prêt à compléter :
+L'app est livrée avec **notre** itinéraire déjà saisi.
 
-1. **Mariage 🇹🇳** — Tunisie (ville/lieu à préciser).
-2. **Lune de miel — Étape 1 : Tunisie** — tour de 3 hôtels (noms, villes, dates à préciser).
-3. **Vol Tunisie → Paris 🇫🇷** — séjour à Paris.
-4. **Vol Paris → Grèce 🇬🇷** — tour :
-   - **Crète** (Héraklion ou Chania ?).
-   - **Santorin**.
-   - **Athènes**.
-5. **Vol Grèce → Paris** — retour à Paris pour conclure.
+**Mariage** : 🇹🇳 **16 juin** — Tunis.
+
+| # | Date (nuit du) | Lieu | Hébergement | Nuits |
+|---|---|---|---|---|
+| 1 | 16/06 | Gammarth, Tunis | **Novotel Gammarth** 🏨 | 1 |
+| 2 | 17–19/06 | Monastir | **Hôtel à Monastir** 🏨 | 3 |
+| 3 | 20–21/06 | Tunis | **Chez mes parents** 🏡 | 2 |
+| 4 | 22/06 | Hammamet | **Hôtel à Hammamet** 🏨 | 1 |
+| 5 | 23/06 | Paris 🇫🇷 | Vol TN → Paris + nuit Paris | 1 |
+| 6 | 24/06 | Paris | Journée à Paris | 1 |
+| 7 | 25–29/06 | Crète 🇬🇷 | Vol Paris → **Héraklion** + voiture de location, 5 jours | 5 |
+| 8 | 30/06 – 01/07 | Santorin | Ferry depuis la Crète, 2 nuits | 2 |
+| 9 | 02/07 | Athènes | Vol Santorin → Athènes, 1 nuit | 1 |
+| 10 | 03/07 | Paris | Vol Athènes → Paris (retour) | — |
+
+**Vols pré-créés (à compléter avec n° de réservation) :**
+- ✈️ Tunis → Paris — **23/06**
+- ✈️ Paris → Héraklion (Crète) — **25/06**
+- ⛴️ Crète → Santorin (ferry) — **30/06**
+- ✈️ Santorin → Athènes — **02/07**
+- ✈️ Athènes → Paris — **03/07**
+
+**Locations à pré-créer :**
+- 🚗 Voiture de location en Crète — du **25/06 au 30/06** (5 jours).
 
 Chaque étape crée automatiquement :
-- une carte de séjour (dates, ville, hôtel) dans la section *Hôtels*,
-- un emplacement réservé dans la section *Vols* pour chaque trajet,
-- des journées vides dans l'*itinéraire jour-par-jour* prêtes à recevoir des activités,
+- une carte de séjour dans la section *Hôtels*,
+- un emplacement réservé dans la section *Vols / Réservations*,
+- des journées dans l'*itinéraire jour-par-jour* prêtes à recevoir des activités,
 - des entrées dans le *Calendrier* unifié.
 
 ## 2. Home / Dashboard (per section)
