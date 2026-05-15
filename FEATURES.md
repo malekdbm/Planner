@@ -62,10 +62,42 @@ Two top-level sections: **Wedding** and **Honeymoon**, switchable from a bottom 
 - Reorder activities within a day (drag handle).
 - Day notes (weather expected, dress code, etc.).
 
-## 11. Honeymoon — Bookings
-- Flights, hotels, transfers, tours, restaurants.
-- Per booking: confirmation number, date/time, cost, attachment (PDF/photo).
-- "Today" view surfaces what's happening now / next.
+## 11. Reservations (Flights, Hotels, Transfers, Tours, Restaurants)
+Used by both Wedding (guest hotels, transport) and Honeymoon (trip bookings).
+
+### 11a. Flights ✈️
+- Airline, flight number, departure airport + time, arrival airport + time.
+- Booking reference (PNR), seat, class, baggage allowance.
+- Cost, currency, paid / unpaid.
+- Attach e-ticket PDF or boarding pass photo.
+- Reminders: check-in opens (24h before), 3h before departure.
+- Round-trip linked as one trip with outbound + return legs.
+
+### 11b. Hotels 🏨
+- Hotel name, address (map link), check-in / check-out dates and times.
+- Confirmation number, room type, number of guests.
+- Cost per night and total, currency, paid / unpaid.
+- Breakfast included? Free cancellation until date.
+- Attach reservation PDF.
+- Tap to call hotel / open in Maps.
+
+### 11c. Other reservations
+- Transfers (taxi, train, rental car), tours, restaurants, spa, activities.
+- Each with date/time, location, confirmation, cost, attachment.
+
+### 11d. Today / Next view
+- Surfaces what's happening now and next: "Flight in 3h", "Check-in at 15:00".
+- All reservations also appear in the Calendar (section 17).
+
+## 17. Calendar 📅
+- Unified calendar across Wedding tasks, vendor meetings, payments due, flights, hotels (check-in/out), reservations, honeymoon activities.
+- Views: **Month**, **Week**, **Day** (swipe to switch).
+- Color-coded by type (wedding / honeymoon / flight / hotel / reservation / payment).
+- Tap a day to see all items for that day.
+- Tap an item to open its detail screen.
+- Filter chips: show/hide categories.
+- "Today" button to jump back.
+- Sync to phone's native calendar (iOS Calendar / Google Calendar) — optional, one-way export.
 
 ## 12. Honeymoon — Packing List
 - Pre-built lists by trip type (beach, city, ski, mixed).
@@ -90,7 +122,7 @@ Two top-level sections: **Wedding** and **Honeymoon**, switchable from a bottom 
 - Backup / restore: export a single `.json` file to share between devices.
 
 ## 16. Mobile-Only UX Principles
-- Bottom tab bar: Home · Wedding · Honeymoon · Settings.
+- Bottom tab bar: Home · Calendar · Wedding · Honeymoon · Settings.
 - Large touch targets (44pt+).
 - Swipe-to-complete on tasks; swipe-to-delete on lists.
 - Native share sheet, camera, contacts picker.
