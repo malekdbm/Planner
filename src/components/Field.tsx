@@ -9,13 +9,13 @@ type Props = Omit<TextInputProps, 'onChange' | 'value'> & {
   multiline?: boolean;
 };
 
-export function Field({ label, value, onChange, numeric, multiline, ...rest }: Props) {
+export function Field({ label, value, onChange, numeric, multiline, style, ...rest }: Props) {
   return (
     <View style={styles.wrap}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         {...rest}
-        style={[styles.input, multiline && styles.multi]}
+        style={[styles.input, multiline && styles.multi, style]}
         value={value}
         onChangeText={onChange}
         placeholderTextColor={colors.textMuted}
