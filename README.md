@@ -1,48 +1,94 @@
 # Mariage & Lune de miel 💍✈️
 
-Application mobile (iPhone + Android) pour organiser le mariage en Tunisie et la lune de miel Paris → Crète → Santorin → Athènes → Paris.
+Application mobile (iPhone + Android) tout-en-un pour organiser le mariage en Tunisie et la lune de miel **Tunisie → Paris → Grèce → Paris**.
 
 - Mariage : **16 juin 2026** à Tunis (Mövenpick Gammarth).
 - Retour : **3 juillet 2026** à Paris.
 - 17 nuits — itinéraire pré-rempli.
 
-## Lancement
+## Lancer l'app sur ton téléphone
 
 ```bash
 npm install
 npx expo start
 ```
 
-Puis :
+- **iPhone** : installe **Expo Go** depuis l'App Store, scanne le QR code.
+- **Android** : installe **Expo Go** depuis le Play Store, scanne le QR code.
 
-- **iPhone** : ouvre l'app **Expo Go** (App Store), scanne le QR code.
-- **Android** : ouvre **Expo Go** (Play Store), scanne le QR code.
+Au premier lancement, l'itinéraire complet est pré-rempli.
 
-L'app démarre directement avec l'itinéraire pré-rempli au premier lancement.
+## Fonctionnalités livrées
 
-## Structure
+### Accueil
+- Compte à rebours mariage + voyage
+- Recherche globale
+- Activités du jour, prochain vol, prochain hôtel
+- Stats budget + RSVP
+- 3 prochaines tâches
 
-- `app/` — écrans (expo-router)
-  - `(tabs)/` — onglets : Accueil · Calendrier · Mariage · Lune de miel · Réglages
-  - `hotels/[id].tsx` — détail hôtel
-  - `vols/[id].tsx` — détail vol
-  - `reservations/[id].tsx` — détail ferry / location / autre
-- `src/`
-  - `db/` — SQLite (schéma + seed itinéraire)
-  - `components/` — UI réutilisable
-  - `utils/` — formatage date/devise (fr-FR)
-  - `theme.ts` — couleurs, espacements
+### Calendrier
+- Vue unifiée : mariage · voyage · vols · hôtels · réservations · activités · jour J
+- Filtres par type, marquage du jour
+- Tap pour ouvrir le détail
 
-## Fonctionnalités v0.1 (livrées)
+### Mariage 💍
+- Checklist (filtres mariage/voyage, swipe)
+- Budget mariage (10 catégories pré-créées + dépenses)
+- Liste d'invités & RSVP (côté, groupe, +1, régime)
+- Plan de table (assigner / retirer, alertes surcapacité)
+- Prestataires (contrats, acomptes, soldes, échéances)
+- Playlist par moment (cérémonie · cocktail · dîner · 1ère danse · soirée · ne pas jouer)
+- Photos / shot list (préparatifs · cérémonie · famille · couple · réception)
+- Vœux & discours (compteur mots + temps de lecture)
+- Jour J — planning minute par minute avec curseur "en cours" temps réel
+- Cadeaux (liste, prix, offert par, reçu)
 
-- Compte à rebours mariage
-- Calendrier unifié (vols, hôtels, ferry, voiture, tâches)
-- Liste des vols + édition (PNR, siège, classe, bagages, coût)
-- Liste des hôtels + édition (confirmation, chambre, coût, téléphone, adresse)
-- Réservations (ferry Crète→Santorin, voiture Crète)
-- Checklist mariage avec barre de progression
-- Réglages (FR, EUR, JJ/MM/AAAA, 24h) + bouton de réinitialisation
+### Lune de miel ✈️
+- Vols & ferry (ajout/édition, PNR, siège, bagages)
+- Hôtels (8 séjours pré-créés, confirmation, coût, adresse)
+- Réservations (voiture Crète, ferry Crète→Santorin + ajout)
+- Itinéraire jour par jour (18 jours pré-créés, activités à ajouter)
+- Budget voyage (7 catégories)
+- Valise par catégorie (35+ articles pré-cochés, marqueur "à acheter")
+- Documents (passeport, CNI, assurance, permis — alerte expiration < 6 mois après voyage)
+- Journal de voyage (humeur, lieu, récit)
+- Convertisseur devise (EUR · TND · USD · GBP, taux modifiables)
 
-## À venir
+### Réglages
+- Notifications push : tâches J-1, vols H-24 et H-3, hôtels J-1, réservations H-2
+- Reset complet
+- FR · EUR · JJ/MM/AAAA · 24h
 
-Voir `FEATURES.md` — budget, liste d'invités, plan de table, musique, vœux, journal de voyage, météo, widgets, etc.
+## Structure du code
+
+```
+app/
+├── (tabs)/         # Accueil · Calendrier · Mariage · Voyage · Réglages
+├── budget/         # vue + catégories + dépenses
+├── checklist/      # tâches
+├── invites/        # RSVP
+├── plan-table/     # plan de table
+├── vendeurs/       # prestataires
+├── playlist/       # musique
+├── photos/         # shot list
+├── voeux/          # vœux & discours
+├── jour-j/         # planning du jour
+├── cadeaux/        # liste cadeaux
+├── vols/           # vols & ferry
+├── hotels/         # hôtels & hébergements
+├── reservations/   # autres
+├── itineraire/     # jour par jour
+├── valise/         # packing
+├── documents/      # passeports etc
+├── journal/        # journal de bord
+├── devise/         # convertisseur
+└── recherche.tsx   # recherche globale
+
+src/
+├── db/             # SQLite + seed
+├── components/     # Card, Screen, DetailScreen, Field, Picker, Btn, FAB
+├── utils/          # date/devise FR
+├── notifications.ts# rappels push
+└── theme.ts        # couleurs
+```
