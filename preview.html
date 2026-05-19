@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Aperçu — Mariage & Lune de miel</title>
+<style>
+  :root {
+    --bg: #FFFBF7; --card: #FFFFFF; --text: #2A2320; --mute: #7A6F68;
+    --border: #EFE3D8; --primary: #C9A27E; --primaryDark: #8A6A4A;
+    --wedding: #D88BA0; --honeymoon: #7BA098; --flight: #5B8FB9;
+    --hotel: #C9A27E; --reservation: #B59CC9; --success: #7FA66B;
+    --danger: #C76D5E; --payment: #E0A458;
+  }
+  body { background: #1c1c1c; margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); padding: 24px; }
+  h1 { color: #fff; text-align: center; margin: 0 0 24px; font-size: 28px; }
+  p.sub { color: #aaa; text-align: center; margin: 0 0 40px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, 380px); gap: 32px; justify-content: center; }
+  .phone {
+    width: 380px; height: 800px; background: var(--bg);
+    border-radius: 40px; overflow: hidden; position: relative;
+    border: 12px solid #111; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .notch { background:#111; height:28px; width:140px; border-radius:0 0 16px 16px; position:absolute; left:50%; transform:translateX(-50%); top:0; z-index:10; }
+  .screen { height: 100%; overflow-y: auto; padding: 50px 18px 90px; box-sizing: border-box; }
+  .screen-title { font-size: 28px; font-weight: 800; color: var(--text); margin: 8px 0 4px; }
+  .screen-sub { font-size: 14px; color: var(--mute); margin: 0 0 20px; }
+  .label { text-align:center; color:#fff; margin-bottom: 12px; font-weight:600; }
+
+  /* tab bar */
+  .tabbar {
+    position:absolute; left:0; right:0; bottom:0;
+    background: var(--card); height: 84px; border-top: 1px solid var(--border);
+    display:flex; padding: 6px 0 24px;
+  }
+  .tab { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; font-size: 10px; font-weight:600; color: var(--mute); }
+  .tab.active { color: var(--primaryDark); }
+  .tab .emoji { font-size: 22px; }
+
+  /* card */
+  .card {
+    background: var(--card); border-radius: 16px; padding: 16px;
+    margin-bottom: 12px; border: 1px solid var(--border);
+  }
+  .card-title { font-size: 17px; font-weight: 600; color: var(--text); }
+  .card-sub { font-size: 13px; color: var(--mute); margin-top: 2px; }
+  .badge { display:inline-block; padding: 4px 10px; border-radius: 999px; color:#fff; font-size: 11px; font-weight: 700; background: var(--primary); }
+  .row { display:flex; align-items:flex-start; gap: 12px; }
+
+  /* search */
+  .search {
+    display:flex; align-items:center; padding: 12px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--border); margin-bottom: 12px;
+  }
+  .search-text { color: var(--mute); font-size: 14px; margin-left: 8px; }
+
+  /* countdown */
+  .countdown {
+    background: var(--primary); border-radius: 16px; padding: 24px; text-align: center;
+    color: #fff; margin-bottom: 12px;
+  }
+  .countdown .label { font-size: 12px; opacity: .9; text-transform: uppercase; letter-spacing: 1px; }
+  .countdown .value { font-size: 72px; font-weight: 800; line-height: 1; margin: 4px 0; }
+  .countdown .date { font-size: 14px; opacity: .95; text-transform: capitalize; }
+
+  /* mini stats */
+  .mini-row { display:flex; gap: 8px; margin-bottom: 12px; }
+  .mini { flex:1; padding: 12px; border-radius: 12px; color:#fff; text-align:center; }
+  .mini.h { background: var(--honeymoon); }
+  .mini.p { background: var(--primary); }
+  .mini-l { font-size: 10px; opacity: .9; }
+  .mini-v { font-size: 22px; font-weight: 800; margin-top: 2px; }
+
+  /* section heading */
+  .section { font-size: 17px; font-weight: 700; color: var(--text); margin: 12px 0 8px; }
+
+  /* hero wedding */
+  .hero-wedding {
+    background: var(--wedding); border-radius: 16px; padding: 24px; color: #fff; margin-bottom: 16px;
+  }
+  .hero-wedding .date { font-size: 14px; opacity: .95; text-transform: capitalize; }
+  .hero-wedding .days { font-size: 48px; font-weight: 800; margin: 4px 0; }
+  .hero-wedding .venue { font-size: 13px; opacity: .95; }
+
+  .hero-honey {
+    background: var(--honeymoon); border-radius: 16px; padding: 24px; color: #fff; margin-bottom: 16px;
+  }
+  .hero-honey .l { font-size: 11px; opacity:.95; text-transform: uppercase; letter-spacing: 1px; }
+  .hero-honey .v { font-size: 44px; font-weight: 800; margin: 4px 0; }
+  .hero-honey .f { font-size: 13px; opacity: .95; }
+
+  /* tile grid */
+  .grid-tile { display:grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tile {
+    background: var(--card); border:1px solid var(--border); border-radius: 16px; padding: 16px;
+  }
+  .tile .e { font-size: 28px; }
+  .tile .t { font-size: 15px; font-weight: 700; margin-top: 4px; }
+  .tile .d { font-size: 11px; color: var(--mute); margin-top: 2px; }
+
+  .stats-row { display:flex; gap: 8px; margin-bottom: 12px; }
+  .stat-card { flex:1; background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 12px; text-align:center; }
+  .stat-v { font-size: 22px; font-weight: 800; color: var(--text); }
+  .stat-l { font-size: 13px; color: var(--mute); margin-top: 4px; }
+
+  /* calendar item */
+  .cal-day { margin-bottom: 16px; }
+  .cal-head { font-size: 14px; font-weight: 700; color: var(--primaryDark); text-transform: capitalize; margin-bottom: 8px; }
+  .cal-head.today { color: var(--wedding); }
+  .cal-item { display:flex; align-items:flex-start; background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 8px; }
+  .cal-dot { width: 4px; align-self: stretch; border-radius: 2px; margin-right: 12px; }
+  .cal-emoji { font-size: 20px; margin-right: 8px; }
+  .cal-title { font-size: 15px; font-weight: 600; }
+  .cal-time { color: var(--primaryDark); font-weight: 700; }
+  .cal-sub { font-size: 13px; color: var(--mute); margin-top: 2px; }
+
+  /* chips */
+  .chips { display:flex; flex-wrap:wrap; gap: 6px; margin-bottom: 12px; }
+  .chip { padding: 6px 12px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); font-size: 12px; }
+  .chip.on { background: var(--primary); color: #fff; border-color: var(--primary); font-weight: 700; }
+
+  /* budget */
+  .summary { display:flex; justify-content: space-between; }
+  .col { flex:1; text-align:center; }
+  .col-l { font-size: 11px; color: var(--mute); text-transform: uppercase; }
+  .col-v { font-size: 17px; font-weight: 700; margin-top: 4px; }
+  .track { height: 6px; background: var(--border); border-radius: 999px; overflow:hidden; margin-top: 8px; }
+  .bar { height: 100%; background: var(--primary); }
+  .cat-card { background: var(--card); padding: 12px; border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--border); }
+  .cat-row { display:flex; align-items: center; margin-bottom: 8px; }
+  .cat-emoji { font-size: 24px; margin-right: 8px; }
+  .cat-name { font-weight: 600; }
+  .cat-sub { font-size: 13px; color: var(--mute); }
+
+  /* day-of */
+  .dayof { display:flex; align-items:flex-start; background: var(--card); border:1px solid var(--border); border-radius:12px; padding:12px; margin-bottom:8px; }
+  .dayof.now { border: 2px solid var(--wedding); background: #FFF5F8; }
+  .dayof-time { width: 60px; font-weight: 700; color: var(--primaryDark); }
+  .dayof.now .dayof-time { color: var(--wedding); }
+  .dayof-title { font-weight: 600; }
+  .dayof.now .dayof-title { color: var(--wedding); }
+  .nowbadge { font-size: 11px; font-weight: 800; color: var(--wedding); letter-spacing: 1px; margin-top: 4px; }
+
+  /* FAB */
+  .fab {
+    position:absolute; right: 18px; bottom: 98px; width: 56px; height: 56px; border-radius: 50%;
+    background: var(--primary); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-size: 30px; box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+
+  /* hotel/flight subtle styles */
+  .route { display:flex; align-items:center; background: var(--card); border:1px solid var(--border); border-radius: 12px; padding: 16px; justify-content: space-between; }
+  .route-box { flex:1; text-align: center; }
+  .route-code { font-size: 28px; font-weight: 800; }
+  .route-city { font-size: 13px; color: var(--mute); }
+  .route-arrow { font-size: 24px; color: var(--flight); }
+</style>
+</head>
+<body>
+
+<h1>📱 Aperçu — Mariage & Lune de miel</h1>
+<p class="sub">Mockup des 8 écrans principaux · 380×800 px · vraies données</p>
+
+<div class="grid">
+
+  <!-- 1. ACCUEIL -->
+  <div>
+    <div class="label">Accueil</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="screen-title">Mariage & Lune de miel</div>
+        <div class="screen-sub">Tunisie · Paris · Grèce</div>
+        <div class="search">🔍 <span class="search-text">Rechercher invité, vol, tâche…</span></div>
+        <div class="countdown">
+          <div class="label">Jours avant le mariage</div>
+          <div class="value">31</div>
+          <div class="date">mardi 16 juin 2026</div>
+        </div>
+        <div class="mini-row">
+          <div class="mini h"><div class="mini-l">Départ voyage</div><div class="mini-v">J-38</div></div>
+          <div class="mini p"><div class="mini-l">RSVP oui</div><div class="mini-v">0/0</div></div>
+        </div>
+        <div class="card">
+          <div class="card-title">💶 Budget global</div>
+          <div class="card-sub">Dépensé 0 € / 0 €</div>
+        </div>
+        <div class="section">À faire (3)</div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Confirmer Mövenpick Gammarth</div><div class="card-sub">Échéance : mer. 20 mai</div></div><span class="badge" style="background:var(--wedding)">💍</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Réserver hôtel Monastir (3 nuits)</div><div class="card-sub">Échéance : mer. 20 mai</div></div><span class="badge" style="background:var(--wedding)">💍</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Réserver vol Tunis → Paris (23/06)</div><div class="card-sub">Échéance : lun. 25 mai</div></div><span class="badge" style="background:var(--honeymoon)">✈️</span></div></div>
+      </div>
+      <div class="tabbar">
+        <div class="tab active"><span class="emoji">🏠</span>Accueil</div>
+        <div class="tab"><span class="emoji">📅</span>Calendrier</div>
+        <div class="tab"><span class="emoji">💍</span>Mariage</div>
+        <div class="tab"><span class="emoji">✈️</span>Lune de miel</div>
+        <div class="tab"><span class="emoji">⚙️</span>Réglages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. CALENDRIER -->
+  <div>
+    <div class="label">Calendrier</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="screen-title">Calendrier</div>
+        <div class="screen-sub">28 évènements</div>
+        <div class="chips">
+          <div class="chip on">Tout</div>
+          <div class="chip">💍</div>
+          <div class="chip">🗺️</div>
+          <div class="chip">✈️</div>
+          <div class="chip">🏨</div>
+          <div class="chip">📌</div>
+        </div>
+
+        <div class="cal-day">
+          <div class="cal-head today">mardi 16 juin 2026 · aujourd'hui</div>
+          <div class="cal-item"><div class="cal-dot" style="background:var(--wedding)"></div><div class="cal-emoji">⏱️</div><div style="flex:1"><div class="cal-title"><span class="cal-time">17:00  </span>Jour J · Cérémonie</div><div class="cal-sub">Tous</div></div></div>
+          <div class="cal-item"><div class="cal-dot" style="background:var(--hotel)"></div><div class="cal-emoji">🏨</div><div style="flex:1"><div class="cal-title">Arrivée Mövenpick Gammarth</div><div class="cal-sub">Gammarth, Tunis · 1 nuit</div></div></div>
+        </div>
+
+        <div class="cal-day">
+          <div class="cal-head">mercredi 17 juin 2026</div>
+          <div class="cal-item"><div class="cal-dot" style="background:var(--hotel)"></div><div class="cal-emoji">🛏️</div><div style="flex:1"><div class="cal-title">Départ Mövenpick Gammarth</div><div class="cal-sub">Gammarth, Tunis</div></div></div>
+          <div class="cal-item"><div class="cal-dot" style="background:var(--hotel)"></div><div class="cal-emoji">🏨</div><div style="flex:1"><div class="cal-title">Arrivée Hôtel Monastir</div><div class="cal-sub">Monastir · 3 nuits</div></div></div>
+        </div>
+
+        <div class="cal-day">
+          <div class="cal-head">mardi 23 juin 2026</div>
+          <div class="cal-item"><div class="cal-dot" style="background:var(--flight)"></div><div class="cal-emoji">✈️</div><div style="flex:1"><div class="cal-title"><span class="cal-time">10:00  </span>Vol Tunis → Paris</div><div class="cal-sub">À réserver</div></div></div>
+        </div>
+
+        <div class="cal-day">
+          <div class="cal-head">jeudi 25 juin 2026</div>
+          <div class="cal-item"><div class="cal-dot" style="background:var(--flight)"></div><div class="cal-emoji">✈️</div><div style="flex:1"><div class="cal-title"><span class="cal-time">10:00  </span>Vol Paris → Héraklion</div><div class="cal-sub">À réserver</div></div></div>
+          <div class="cal-item"><div class="cal-dot" style="background:var(--reservation)"></div><div class="cal-emoji">🚗</div><div style="flex:1"><div class="cal-title"><span class="cal-time">12:00  </span>Voiture de location en Crète</div><div class="cal-sub">Aéroport Héraklion · 5 jours</div></div></div>
+        </div>
+      </div>
+      <div class="tabbar">
+        <div class="tab"><span class="emoji">🏠</span>Accueil</div>
+        <div class="tab active"><span class="emoji">📅</span>Calendrier</div>
+        <div class="tab"><span class="emoji">💍</span>Mariage</div>
+        <div class="tab"><span class="emoji">✈️</span>Lune de miel</div>
+        <div class="tab"><span class="emoji">⚙️</span>Réglages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MARIAGE HUB -->
+  <div>
+    <div class="label">Mariage (hub)</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="screen-title">Mariage</div>
+        <div class="screen-sub">Tunis · 16 juin 2026</div>
+        <div class="hero-wedding">
+          <div class="date">mardi 16 juin 2026</div>
+          <div class="days">31 jours</div>
+          <div class="venue">Nuit du mariage · Mövenpick Gammarth, Gammarth, Tunis</div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-v">0/4</div><div class="stat-l">Tâches</div></div>
+          <div class="stat-card"><div class="stat-v">0/0</div><div class="stat-l">RSVP oui</div></div>
+        </div>
+        <div class="grid-tile">
+          <div class="tile"><div class="e">✅</div><div class="t">Checklist</div><div class="d">Tâches & échéances</div></div>
+          <div class="tile"><div class="e">💶</div><div class="t">Budget</div><div class="d">Catégories & dépenses</div></div>
+          <div class="tile"><div class="e">👥</div><div class="t">Invités</div><div class="d">RSVP & contacts</div></div>
+          <div class="tile"><div class="e">🪑</div><div class="t">Plan de table</div><div class="d">Tables & placement</div></div>
+          <div class="tile"><div class="e">🤝</div><div class="t">Prestataires</div><div class="d">Contrats & paiements</div></div>
+          <div class="tile"><div class="e">🎵</div><div class="t">Playlist</div><div class="d">Cérémonie · soirée</div></div>
+          <div class="tile"><div class="e">📸</div><div class="t">Photos</div><div class="d">Liste de plans</div></div>
+          <div class="tile"><div class="e">💌</div><div class="t">Vœux & discours</div><div class="d">Brouillons privés</div></div>
+          <div class="tile"><div class="e">⏱️</div><div class="t">Jour J</div><div class="d">Planning minute par minute</div></div>
+          <div class="tile"><div class="e">🎁</div><div class="t">Cadeaux</div><div class="d">Liste & cagnotte</div></div>
+        </div>
+      </div>
+      <div class="tabbar">
+        <div class="tab"><span class="emoji">🏠</span>Accueil</div>
+        <div class="tab"><span class="emoji">📅</span>Calendrier</div>
+        <div class="tab active"><span class="emoji">💍</span>Mariage</div>
+        <div class="tab"><span class="emoji">✈️</span>Lune de miel</div>
+        <div class="tab"><span class="emoji">⚙️</span>Réglages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. LUNE DE MIEL HUB -->
+  <div>
+    <div class="label">Lune de miel (hub)</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="screen-title">Lune de miel</div>
+        <div class="screen-sub">Tunisie · Paris · Grèce</div>
+        <div class="hero-honey">
+          <div class="l">Départ pour Paris dans</div>
+          <div class="v">38 jours</div>
+          <div class="f">Retour le 03/07 · 48 j</div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-v">4</div><div class="stat-l">Vols</div></div>
+          <div class="stat-card"><div class="stat-v">8</div><div class="stat-l">Hôtels</div></div>
+          <div class="stat-card"><div class="stat-v">18</div><div class="stat-l">Jours</div></div>
+        </div>
+        <div class="grid-tile">
+          <div class="tile"><div class="e">✈️</div><div class="t">Vols & ferry</div><div class="d">Tunis · Paris · Grèce</div></div>
+          <div class="tile"><div class="e">🏨</div><div class="t">Hôtels</div><div class="d">17 nuits · 8 séjours</div></div>
+          <div class="tile"><div class="e">📌</div><div class="t">Réservations</div><div class="d">Voiture · ferry · tours</div></div>
+          <div class="tile"><div class="e">🗺️</div><div class="t">Itinéraire</div><div class="d">Jour par jour</div></div>
+          <div class="tile"><div class="e">💶</div><div class="t">Budget voyage</div><div class="d">Dépenses & catégories</div></div>
+          <div class="tile"><div class="e">🎒</div><div class="t">Valise</div><div class="d">Liste à cocher</div></div>
+          <div class="tile"><div class="e">🛂</div><div class="t">Documents</div><div class="d">Passeport, assurance...</div></div>
+          <div class="tile"><div class="e">📖</div><div class="t">Journal</div><div class="d">Souvenirs jour par jour</div></div>
+          <div class="tile"><div class="e">💱</div><div class="t">Devise</div><div class="d">Convertisseur</div></div>
+        </div>
+      </div>
+      <div class="tabbar">
+        <div class="tab"><span class="emoji">🏠</span>Accueil</div>
+        <div class="tab"><span class="emoji">📅</span>Calendrier</div>
+        <div class="tab"><span class="emoji">💍</span>Mariage</div>
+        <div class="tab active"><span class="emoji">✈️</span>Lune de miel</div>
+        <div class="tab"><span class="emoji">⚙️</span>Réglages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. HÔTELS -->
+  <div>
+    <div class="label">Hôtels (liste)</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="screen-title">Hôtels & hébergements</div>
+        <div class="screen-sub">8 séjours · 17 nuits</div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Mövenpick Gammarth</div><div class="card-sub">mar. 16 juin → mer. 17 juin · 1 nuit · Gammarth, Tunis</div></div><span class="badge" style="background:var(--danger)">À réserver</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Hôtel à Monastir</div><div class="card-sub">mer. 17 juin → sam. 20 juin · 3 nuits · Monastir</div></div><span class="badge" style="background:var(--danger)">À réserver</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Chez mes parents</div><div class="card-sub">sam. 20 juin → lun. 22 juin · 2 nuits · Tunis</div></div><span class="badge" style="background:var(--honeymoon)">Famille</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Hôtel à Hammamet</div><div class="card-sub">lun. 22 juin → mar. 23 juin · 1 nuit · Hammamet</div></div><span class="badge" style="background:var(--danger)">À réserver</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Hôtel à Paris</div><div class="card-sub">mar. 23 juin → jeu. 25 juin · 2 nuits · Paris</div></div><span class="badge" style="background:var(--danger)">À réserver</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Hôtel à Héraklion / Crète</div><div class="card-sub">jeu. 25 juin → mar. 30 juin · 5 nuits · Héraklion</div></div><span class="badge" style="background:var(--danger)">À réserver</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Hôtel à Santorin</div><div class="card-sub">mar. 30 juin → jeu. 2 juil. · 2 nuits · Santorin</div></div><span class="badge" style="background:var(--danger)">À réserver</span></div></div>
+        <div class="card"><div class="row"><div style="flex:1"><div class="card-title">Hôtel à Athènes</div><div class="card-sub">jeu. 2 juil. → ven. 3 juil. · 1 nuit · Athènes</div></div><span class="badge" style="background:var(--danger)">À réserver</span></div></div>
+      </div>
+      <div class="fab">+</div>
+      <div class="tabbar">
+        <div class="tab"><span class="emoji">🏠</span>Accueil</div>
+        <div class="tab"><span class="emoji">📅</span>Calendrier</div>
+        <div class="tab"><span class="emoji">💍</span>Mariage</div>
+        <div class="tab active"><span class="emoji">✈️</span>Lune de miel</div>
+        <div class="tab"><span class="emoji">⚙️</span>Réglages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. DÉTAIL VOL -->
+  <div>
+    <div class="label">Détail d'un vol</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div style="color: var(--primaryDark); font-weight: 600; padding: 8px 0;">‹ Retour</div>
+        <div class="screen-title">✈️ Paris → Héraklion</div>
+        <div class="screen-sub">jeudi 25 juin 2026 · 10:00</div>
+        <div class="route" style="margin-bottom: 16px;">
+          <div class="route-box"><div class="route-code">CDG</div><div class="route-city">Paris</div><div style="color: var(--flight); font-weight: 700; margin-top: 4px; font-size: 13px;">10:00</div></div>
+          <div class="route-arrow">→</div>
+          <div class="route-box"><div class="route-code">HER</div><div class="route-city">Héraklion</div></div>
+        </div>
+        <div style="font-size: 13px; color: var(--mute); margin-bottom: 4px;">Compagnie</div>
+        <div style="background:var(--card); border:1px solid var(--border); padding:12px; border-radius: 12px; margin-bottom: 12px;">Air France</div>
+        <div style="font-size: 13px; color: var(--mute); margin-bottom: 4px;">N° de vol</div>
+        <div style="background:var(--card); border:1px solid var(--border); padding:12px; border-radius: 12px; margin-bottom: 12px;">AF1432</div>
+        <div style="font-size: 13px; color: var(--mute); margin-bottom: 4px;">N° de réservation (PNR)</div>
+        <div style="background:var(--card); border:1px solid var(--border); padding:12px; border-radius: 12px; margin-bottom: 12px;">XBKLMQ</div>
+        <div style="font-size: 13px; color: var(--mute); margin-bottom: 4px;">Siège</div>
+        <div style="background:var(--card); border:1px solid var(--border); padding:12px; border-radius: 12px; margin-bottom: 12px;">12A</div>
+        <div style="font-size: 13px; color: var(--mute); margin-bottom: 4px;">Coût total (€)</div>
+        <div style="background:var(--card); border:1px solid var(--border); padding:12px; border-radius: 12px; margin-bottom: 12px;">240</div>
+        <button style="width:100%; background: var(--primary); color: #fff; border: 0; padding: 16px; border-radius: 12px; font-weight: 700; font-size: 15px; margin-top: 8px;">Enregistrer</button>
+        <button style="width:100%; background: var(--danger); color: #fff; border: 0; padding: 16px; border-radius: 12px; font-weight: 700; font-size: 15px; margin-top: 8px;">Supprimer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. BUDGET -->
+  <div>
+    <div class="label">Budget</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="screen-title">Budget</div>
+        <div class="screen-sub">💍 Mariage</div>
+        <div class="chips" style="gap:6px;">
+          <div class="chip on" style="flex:1; text-align:center;">💍 Mariage</div>
+          <div class="chip" style="flex:1; text-align:center;">✈️ Voyage</div>
+        </div>
+        <div class="card">
+          <div class="summary">
+            <div class="col"><div class="col-l">Prévu</div><div class="col-v">25 000 €</div></div>
+            <div class="col"><div class="col-l">Dépensé</div><div class="col-v">3 200 €</div></div>
+            <div class="col"><div class="col-l">Reste</div><div class="col-v" style="color: var(--success)">21 800 €</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🧾 Voir toutes les dépenses</div>
+          <div class="card-sub">Ajouter / éditer un reçu</div>
+        </div>
+        <div class="section">Catégories</div>
+        <div class="cat-card">
+          <div class="cat-row"><div class="cat-emoji">🏛️</div><div style="flex:1"><div class="cat-name">Lieu de réception</div><div class="cat-sub">2 000 € / 8 000 €</div></div></div>
+          <div class="track"><div class="bar" style="width:25%"></div></div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-row"><div class="cat-emoji">🍽️</div><div style="flex:1"><div class="cat-name">Traiteur</div><div class="cat-sub">800 € / 6 000 €</div></div></div>
+          <div class="track"><div class="bar" style="width:13%"></div></div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-row"><div class="cat-emoji">👗</div><div style="flex:1"><div class="cat-name">Tenues</div><div class="cat-sub">400 € / 3 000 €</div></div></div>
+          <div class="track"><div class="bar" style="width:13%"></div></div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-row"><div class="cat-emoji">📸</div><div style="flex:1"><div class="cat-name">Photographe / vidéo</div><div class="cat-sub">0 € / 2 500 €</div></div></div>
+          <div class="track"><div class="bar" style="width:0%"></div></div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-row"><div class="cat-emoji">💐</div><div style="flex:1"><div class="cat-name">Fleurs & déco</div><div class="cat-sub">0 € / 1 500 €</div></div></div>
+          <div class="track"><div class="bar" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="fab">+</div>
+      <div class="tabbar">
+        <div class="tab"><span class="emoji">🏠</span>Accueil</div>
+        <div class="tab"><span class="emoji">📅</span>Calendrier</div>
+        <div class="tab active"><span class="emoji">💍</span>Mariage</div>
+        <div class="tab"><span class="emoji">✈️</span>Lune de miel</div>
+        <div class="tab"><span class="emoji">⚙️</span>Réglages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. JOUR J -->
+  <div>
+    <div class="label">Jour J — 16 juin</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="screen">
+        <div class="screen-title">Jour J</div>
+        <div class="screen-sub">Planning minute par minute</div>
+        <div class="dayof"><div class="dayof-time">09:00</div><div style="flex:1"><div class="dayof-title">Réveil + petit-déjeuner</div><div class="cal-sub">👤 Mariés</div></div></div>
+        <div class="dayof"><div class="dayof-time">10:00</div><div style="flex:1"><div class="dayof-title">Coiffure & maquillage mariée</div><div class="cal-sub">👤 Mariée + témoins</div></div></div>
+        <div class="dayof"><div class="dayof-time">12:00</div><div style="flex:1"><div class="dayof-title">Déjeuner léger</div><div class="cal-sub">👤 Mariés</div></div></div>
+        <div class="dayof"><div class="dayof-time">14:00</div><div style="flex:1"><div class="dayof-title">Habillage</div><div class="cal-sub">👤 Mariés séparément</div></div></div>
+        <div class="dayof"><div class="dayof-time">15:30</div><div style="flex:1"><div class="dayof-title">Photos de préparatifs</div><div class="cal-sub">👤 Photographe</div></div></div>
+        <div class="dayof"><div class="dayof-time">16:30</div><div style="flex:1"><div class="dayof-title">Arrivée sur le lieu</div><div class="cal-sub">👤 Tous</div></div></div>
+        <div class="dayof now">
+          <div class="dayof-time">17:00</div>
+          <div style="flex:1">
+            <div class="dayof-title">Cérémonie</div>
+            <div class="cal-sub">👤 Tous</div>
+            <div class="nowbadge">EN COURS</div>
+          </div>
+        </div>
+        <div class="dayof"><div class="dayof-time">18:00</div><div style="flex:1"><div class="dayof-title">Vin d'honneur / cocktail</div><div class="cal-sub">👤 Tous</div></div></div>
+        <div class="dayof"><div class="dayof-time">19:30</div><div style="flex:1"><div class="dayof-title">Photos de couple</div><div class="cal-sub">👤 Mariés + photographe</div></div></div>
+        <div class="dayof"><div class="dayof-time">20:30</div><div style="flex:1"><div class="dayof-title">Dîner</div><div class="cal-sub">👤 Tous</div></div></div>
+        <div class="dayof"><div class="dayof-time">22:00</div><div style="flex:1"><div class="dayof-title">Première danse</div><div class="cal-sub">👤 Mariés</div></div></div>
+      </div>
+      <div class="fab">+</div>
+      <div class="tabbar">
+        <div class="tab"><span class="emoji">🏠</span>Accueil</div>
+        <div class="tab"><span class="emoji">📅</span>Calendrier</div>
+        <div class="tab active"><span class="emoji">💍</span>Mariage</div>
+        <div class="tab"><span class="emoji">✈️</span>Lune de miel</div>
+        <div class="tab"><span class="emoji">⚙️</span>Réglages</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; color:#777; margin-top: 40px;">
+  Pour la <strong style="color:#fff;">vraie</strong> app interactive sur ton téléphone :<br />
+  <code style="color:#fff;">git pull && npm install && npx expo start</code><br />
+  puis scanne le QR avec <strong style="color:#fff;">Expo Go</strong> (App Store ou Play Store).
+</p>
+
+</body>
+</html>
