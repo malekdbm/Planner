@@ -11,6 +11,40 @@ Two top-level sections: **Wedding** and **Honeymoon**, switchable from a bottom 
 - Honeymoon destination (optional at start), start/end dates.
 - Saves locally on the phone (no account needed for v1).
 
+### 1a. Itinéraire pré-rempli (notre voyage)
+L'app est livrée avec **notre** itinéraire déjà saisi.
+
+**Mariage** : 🇹🇳 **16 juin** — Tunis.
+
+| # | Date (nuit du) | Lieu | Hébergement | Nuits |
+|---|---|---|---|---|
+| 1 | 16/06 | Gammarth, Tunis | **Mövenpick Gammarth** 🏨 | 1 |
+| 2 | 17–19/06 | Monastir | **Hôtel à Monastir** 🏨 | 3 |
+| 3 | 20–21/06 | Tunis | **Chez mes parents** 🏡 | 2 |
+| 4 | 22/06 | Hammamet | **Hôtel à Hammamet** 🏨 | 1 |
+| 5 | 23/06 | Paris 🇫🇷 | Vol TN → Paris + nuit Paris | 1 |
+| 6 | 24/06 | Paris | Journée à Paris | 1 |
+| 7 | 25–29/06 | Crète 🇬🇷 | Vol Paris → **Héraklion** + voiture de location, 5 jours | 5 |
+| 8 | 30/06 – 01/07 | Santorin | Ferry depuis la Crète, 2 nuits | 2 |
+| 9 | 02/07 | Athènes | Vol Santorin → Athènes, 1 nuit | 1 |
+| 10 | 03/07 | Paris | Vol Athènes → Paris (retour) | — |
+
+**Vols pré-créés (à compléter avec n° de réservation) :**
+- ✈️ Tunis → Paris — **23/06**
+- ✈️ Paris → Héraklion (Crète) — **25/06**
+- ⛴️ Crète → Santorin (ferry) — **30/06**
+- ✈️ Santorin → Athènes — **02/07**
+- ✈️ Athènes → Paris — **03/07**
+
+**Locations à pré-créer :**
+- 🚗 Voiture de location en Crète — du **25/06 au 30/06** (5 jours).
+
+Chaque étape crée automatiquement :
+- une carte de séjour dans la section *Hôtels*,
+- un emplacement réservé dans la section *Vols / Réservations*,
+- des journées dans l'*itinéraire jour-par-jour* prêtes à recevoir des activités,
+- des entrées dans le *Calendrier* unifié.
+
 ## 2. Home / Dashboard (per section)
 - Countdown to wedding day and to honeymoon departure.
 - Budget used vs. remaining (progress bar).
@@ -62,10 +96,42 @@ Two top-level sections: **Wedding** and **Honeymoon**, switchable from a bottom 
 - Reorder activities within a day (drag handle).
 - Day notes (weather expected, dress code, etc.).
 
-## 11. Honeymoon — Bookings
-- Flights, hotels, transfers, tours, restaurants.
-- Per booking: confirmation number, date/time, cost, attachment (PDF/photo).
-- "Today" view surfaces what's happening now / next.
+## 11. Reservations (Flights, Hotels, Transfers, Tours, Restaurants)
+Used by both Wedding (guest hotels, transport) and Honeymoon (trip bookings).
+
+### 11a. Flights ✈️
+- Airline, flight number, departure airport + time, arrival airport + time.
+- Booking reference (PNR), seat, class, baggage allowance.
+- Cost, currency, paid / unpaid.
+- Attach e-ticket PDF or boarding pass photo.
+- Reminders: check-in opens (24h before), 3h before departure.
+- Round-trip linked as one trip with outbound + return legs.
+
+### 11b. Hotels 🏨
+- Hotel name, address (map link), check-in / check-out dates and times.
+- Confirmation number, room type, number of guests.
+- Cost per night and total, currency, paid / unpaid.
+- Breakfast included? Free cancellation until date.
+- Attach reservation PDF.
+- Tap to call hotel / open in Maps.
+
+### 11c. Other reservations
+- Transfers (taxi, train, rental car), tours, restaurants, spa, activities.
+- Each with date/time, location, confirmation, cost, attachment.
+
+### 11d. Today / Next view
+- Surfaces what's happening now and next: "Flight in 3h", "Check-in at 15:00".
+- All reservations also appear in the Calendar (section 17).
+
+## 17. Calendar 📅
+- Unified calendar across Wedding tasks, vendor meetings, payments due, flights, hotels (check-in/out), reservations, honeymoon activities.
+- Views: **Month**, **Week**, **Day** (swipe to switch).
+- Color-coded by type (wedding / honeymoon / flight / hotel / reservation / payment).
+- Tap a day to see all items for that day.
+- Tap an item to open its detail screen.
+- Filter chips: show/hide categories.
+- "Today" button to jump back.
+- Sync to phone's native calendar (iOS Calendar / Google Calendar) — optional, one-way export.
 
 ## 12. Honeymoon — Packing List
 - Pre-built lists by trip type (beach, city, ski, mixed).
@@ -89,8 +155,99 @@ Two top-level sections: **Wedding** and **Honeymoon**, switchable from a bottom 
 - Export: PDF summary of guest list, budget, itinerary.
 - Backup / restore: export a single `.json` file to share between devices.
 
+## 18. Countdown Widget & Lock Screen
+- Home-screen widget: days until wedding, days until honeymoon.
+- Lock-screen widget (iOS) / glance (Android) with next event.
+- Tap widget to open the relevant screen.
+
+## 19. Gift Registry & Money Pool
+- Add gift ideas with name, store, price, link, photo.
+- Mark as "claimed by" a guest (private to you).
+- "Cash fund" pool with goal amount and progress (e.g., honeymoon fund).
+- Share a public registry link via native share sheet.
+
+## 20. Music & Playlists 🎵
+- Ceremony, cocktail, dinner, first dance, party playlists.
+- Add songs with title, artist, duration, link (Spotify / Apple Music / YouTube).
+- "Do NOT play" list to send the DJ.
+- Total duration per moment vs. needed time.
+
+## 21. Speeches & Vows
+- Private notepad for vows, speech drafts.
+- Versioning (auto-save history).
+- Practice mode: large-text teleprompter with adjustable scroll speed.
+- Lockable with Face ID / Touch ID (private from partner).
+
+## 22. Photo & Video Plan
+- Shot list for photographer (must-have moments + people groupings).
+- Family combination list (e.g., "bride + both parents").
+- Timeline of photo sessions with duration estimates.
+- Share PDF with photographer.
+
+## 23. Day-Of Timeline
+- Minute-by-minute schedule of the wedding day.
+- Roles: who needs to be where (bridal party, family, vendors).
+- Share read-only link with vendors and party.
+- Live "now" cursor that highlights the current item.
+
+## 24. Vendor Payment Schedule
+- Per vendor: deposit, milestone payments, final balance, due dates.
+- Calendar reminders before each due date.
+- Mark paid, attach receipt.
+- Roll-up: total due this month / next month.
+
+## 25. Travel Companion (Honeymoon)
+- Offline maps for each destination (download before flying).
+- Currency converter with daily rate cache.
+- Local time + home time clock.
+- Tipping guide per country.
+- Emergency numbers per country.
+- Useful phrases (greetings, allergies, taxi) — offline.
+
+## 26. Trip Journal
+- Daily entry while on honeymoon: text, photos, location, mood.
+- Auto-generates a shareable trip recap (PDF/photo book layout).
+- Private by default.
+
+## 27. Weather
+- 10-day forecast for wedding venue (highlights wedding day).
+- Forecast per honeymoon day at the right city.
+- Sunrise / sunset times (useful for photos).
+
+## 28. Guest Communication
+- Bulk message templates: save-the-date, invite, RSVP reminder, week-of info.
+- Send via WhatsApp / SMS / email through the native share sheet.
+- Personalize with `{firstName}` tokens.
+- Track who has been sent what (locally).
+
+## 29. Invite & Website Builder (lite)
+- Pre-styled invitation card; fill in names / date / venue / RSVP link.
+- Export as image to share on WhatsApp / Instagram.
+- Optional: tiny one-page event site (hosted later) for guest info, dress code, map, hotel block.
+
+## 30. Hotel Block for Guests (Wedding)
+- Track room blocks at one or more hotels: hotel name, group code, rate, cutoff date.
+- Track which guests booked.
+
+## 31. Seat-of-the-Pants Notes & To-Do Capture
+- Global "+" button on every screen.
+- Quick capture: voice memo, photo, note → triage later into the right list.
+
+## 32. Settings & Privacy
+- Devise, format de date.
+- Thème : système / clair / sombre.
+- Verrouillage de l'app avec Face ID / Touch ID / code PIN.
+- Sauvegarde iCloud (iOS) / Google Drive (Android) — chiffrée.
+- Supprimer toutes les données.
+
+## 33. Langue
+- **Application en français uniquement.**
+- Toute l'interface, les notifications, les modèles de messages et les exports PDF sont en français.
+- Formats de date (JJ/MM/AAAA) et heure (24h) à la française par défaut.
+- Devise par défaut : EUR (€), modifiable dans les paramètres.
+
 ## 16. Mobile-Only UX Principles
-- Bottom tab bar: Home · Wedding · Honeymoon · Settings.
+- Bottom tab bar: Home · Calendar · Wedding · Honeymoon · Settings.
 - Large touch targets (44pt+).
 - Swipe-to-complete on tasks; swipe-to-delete on lists.
 - Native share sheet, camera, contacts picker.
@@ -106,8 +263,9 @@ Two top-level sections: **Wedding** and **Honeymoon**, switchable from a bottom 
 
 ---
 
-## Proposed tech (for after feature approval)
-- **React Native + Expo** — single codebase, runs on your phone via Expo Go for testing, easy to ship to App Store / Play Store later.
-- **Local storage**: SQLite (via `expo-sqlite`) for structured data, FileSystem for photos.
-- **Notifications**: `expo-notifications`.
-- **Navigation**: `expo-router` with bottom tabs.
+## Tech retenue
+- **React Native + Expo** — un seul code, testé en parallèle sur **iPhone et Android** via Expo Go.
+- **Stockage local** : SQLite (`expo-sqlite`) pour les données structurées, FileSystem pour les photos.
+- **Notifications** : `expo-notifications`.
+- **Navigation** : `expo-router` avec onglets en bas.
+- **Langue** : française uniquement (cf. §33).
